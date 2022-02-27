@@ -8,7 +8,7 @@
 
   <ion-list class="animated bounceInUp">
 
-    <!-- <ion-reorder-group disabled="false"> -->
+    <ion-reorder-group disabled="false">
     
       <ion-item *ngIf="tasks.length < 1">
         <ion-label>Não há tarefas</ion-label>
@@ -22,6 +22,7 @@
           <ion-label *ngIf="task.done"><del>{{task.name}}</del></ion-label>
           <ion-icon slot="start" name="radio-button-off" *ngIf="!task.done"></ion-icon>
           <ion-icon slot="start" name="checkmark-circle" color="success" *ngIf="task.done"></ion-icon>
+          <ion-reorder slot="end"></ion-reorder>
 
         </ion-item>
 
@@ -43,7 +44,7 @@
 
       </ion-item-sliding>
 
-    <!-- </ion-reorder-group> -->
+    </ion-reorder-group>
 
   </ion-list>
 
