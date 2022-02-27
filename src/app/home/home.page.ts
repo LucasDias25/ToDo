@@ -1,5 +1,4 @@
-
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Camera, CameraOptions } from '@awesome-cordova-plugins/camera/ngx';
 import { ActionSheetController, AlertController, ItemReorderEventDetail,} from '@ionic/angular';
 import { UtilService } from '../services/util.service';
@@ -11,7 +10,7 @@ import { UtilService } from '../services/util.service';
   styleUrls: ['home.page.scss'],
 })
 
-export class HomePage {
+export class HomePage implements OnInit{
 
   //lista de tarefas
   tasks : any[] = [];
@@ -59,6 +58,34 @@ export class HomePage {
     await alert.present();
   }
 
+  //deletar todas as tarefas
+  async deleteAll() {
+    const alert = await this.alertCtrl.create({
+      header: 'Deseja excluir todas as tarefas?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'tertiary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          },
+        },
+        {
+          text: 'Sim',
+          handler: (form) => {
+
+            while (this.tasks.length != 0){
+              this.tasks.pop();  
+              this.updateLocalStorage();
+            }
+
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
 
 
   async add(newTask: string) {
@@ -115,7 +142,6 @@ export class HomePage {
 
 
 
-
   async delete(task : any){
 
     const alert = await this.alertCtrl.create({
@@ -163,6 +189,10 @@ export class HomePage {
     }, (err) => {
      // Handle error
     });
+  }
+
+ 
+  ngOnInit() {
   }
 
 }

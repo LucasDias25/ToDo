@@ -1,5 +1,4 @@
-
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar color="tertiary">
     <ion-title>ToDo</ion-title>
   </ion-toolbar>
@@ -23,7 +22,6 @@
           <ion-label *ngIf="task.done"><del>{{task.name}}</del></ion-label>
           <ion-icon slot="start" name="radio-button-off" *ngIf="!task.done"></ion-icon>
           <ion-icon slot="start" name="checkmark-circle" color="success" *ngIf="task.done"></ion-icon>
-          <!-- <ion-reorder slot="end" (click)=catchTask(task)></ion-reorder> -->
 
         </ion-item>
 
@@ -35,9 +33,9 @@
 
         </ion-item-options>
         
-        <ion-item-options *ngIf="task.done" side="end">
+        <ion-item-options side="end">
 
-          <ion-item-option color="light" (click)="picture()">
+          <ion-item-option *ngIf="task.done" color="light" (click)="picture()">
             <ion-icon slot="icon-only" name="camera" color="secondary"></ion-icon>
           </ion-item-option>
 
@@ -49,10 +47,19 @@
 
   </ion-list>
 
+
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button (click)="showAdd()" color="tertiary">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
+
+
+  <ion-fab vertical="bottom" horizontal="start" slot="fixed">
+    <ion-fab-button (click)="deleteAll(tasks)" color="danger">
+      <ion-icon name="trash"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
 
 </ion-content>
