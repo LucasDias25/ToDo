@@ -4,6 +4,8 @@ import { ActionSheetController, AlertController, ItemReorderEventDetail,} from '
 import { UtilService } from '../services/util.service';
 
 
+var i: number = 0;
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -14,6 +16,7 @@ export class HomePage implements OnInit{
 
   //lista de tarefas
   tasks : any[] = [];
+  
 
   constructor(
     private camera : Camera,
@@ -92,14 +95,22 @@ export class HomePage implements OnInit{
     //valida se o usario preencheu a task
     if (newTask.trim().length < 1) {
       this.utilService.showToast('Informe o que deseja fazer',1000);
+      //i = 0;
       return;
-    }
+      
+    } //else {
+      //i = newTask.trim().length;
+    //}
+    
+    i++;
 
-    let task = { name: newTask, done: false };
+    let task = { name: newTask, done: false , id: i};
 
     this.tasks.push(task);
   
     this.updateLocalStorage();
+
+    console.log(i);
 
   }
 
@@ -194,6 +205,21 @@ export class HomePage implements OnInit{
  
   ngOnInit() {
   }
+
+
+
+  onReorderItems(event) {
+    console.log(`Moving item from ${event.detail.from} to ${event.detail.to}`);
+    let draggedItem = this.tasks.splice(event.detail.from,1)[0];
+    this.tasks.splice(event.detail.to,0,draggedItem)
+    
+    event.detail.complete();
+
+    console.table(this.tasks);
+
+    this.updateLocalStorage();
+  }
+
 
 }
 

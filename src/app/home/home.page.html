@@ -7,13 +7,13 @@
 <ion-content [fullscreen]="true">
 
   <ion-list class="animated bounceInUp">
-
-    <ion-reorder-group disabled="false">
     
-      <ion-item *ngIf="tasks.length < 1">
-        <ion-label>Não há tarefas</ion-label>
-      </ion-item>
+    <ion-item *ngIf="tasks.length < 1">
+      <ion-label>Não há tarefas</ion-label>
+    </ion-item>
 
+    <ion-reorder-group disabled="false" (ionItemReorder)="onReorderItems($event)">
+    
       <ion-item-sliding *ngFor="let task of tasks">
 
         <ion-item (click)="openActions(task)">
@@ -22,9 +22,10 @@
           <ion-label *ngIf="task.done"><del>{{task.name}}</del></ion-label>
           <ion-icon slot="start" name="radio-button-off" *ngIf="!task.done"></ion-icon>
           <ion-icon slot="start" name="checkmark-circle" color="success" *ngIf="task.done"></ion-icon>
-          <ion-reorder slot="end"></ion-reorder>
+          <ion-reorder slot="end" ></ion-reorder>
 
         </ion-item>
+        
 
         <ion-item-options side="start">
 
@@ -47,6 +48,7 @@
     </ion-reorder-group>
 
   </ion-list>
+
 
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
