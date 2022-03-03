@@ -4,20 +4,20 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content color="secondary" [fullscreen]="true">
 
-  <ion-list class="animated bounceInUp">
+  <ion-list class="animated bounceInUp" color="secondary">
     
-    <ion-item *ngIf="tasks.length < 1">
+    <ion-item *ngIf="tasks.length < 1"  color="secondary" >
       <ion-label>Não há tarefas</ion-label>
     </ion-item>
 
     
     <ion-reorder-group disabled="false" (ionItemReorder)="onReorderItems($event)">
     
-      <ion-item-sliding *ngFor="let task of tasks">
+      <ion-item-sliding color="secondary" *ngFor="let task of tasks">
 
-        <ion-item (click)="openActions(task)">
+        <ion-item (click)="openActions(task)" color="secondary">
 
           <ion-label *ngIf="!task.done">{{task.name}}</ion-label>
           <ion-label *ngIf="task.done"><del>{{task.name}}</del></ion-label>
@@ -30,7 +30,7 @@
 
         <ion-item-options side="start">
 
-          <ion-item-option color="light" (click)="delete(task)">
+          <ion-item-option color="secondary" (click)="delete(task)">
             <ion-icon slot="icon-only" name="trash" color="danger"></ion-icon>
           </ion-item-option>
 
@@ -38,8 +38,8 @@
         
         <ion-item-options side="end">
 
-          <ion-item-option *ngIf="task.done" color="light" (click)="picture()">
-            <ion-icon slot="icon-only" name="camera" color="secondary"></ion-icon>
+          <ion-item-option *ngIf="task.done" color="secondary" (click)="picture()">
+            <ion-icon slot="icon-only" name="camera" color="primary"></ion-icon>
           </ion-item-option>
 
         </ion-item-options>
@@ -63,6 +63,5 @@
       <ion-icon name="trash"></ion-icon>
     </ion-fab-button>
   </ion-fab>
-
 
 </ion-content>

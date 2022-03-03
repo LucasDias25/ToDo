@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PRIMARY_OUTLET } from '@angular/router';
 import { Camera, CameraOptions } from '@awesome-cordova-plugins/camera/ngx';
 import { ActionSheetController, AlertController, ItemReorderEventDetail,} from '@ionic/angular';
 import { UtilService } from '../services/util.service';
@@ -13,7 +14,6 @@ export class HomePage implements OnInit{
 
   //lista de tarefas
   tasks : any[] = [];
-  
 
   constructor(
     private camera : Camera,
@@ -27,7 +27,6 @@ export class HomePage implements OnInit{
     }
   }
 
-
   async showAdd() {
     const alert = await this.alertCtrl.create({
       header: 'O que deseja fazer?',
@@ -36,6 +35,7 @@ export class HomePage implements OnInit{
           name: 'newTask',
           type: 'text',
           placeholder: 'O que deseja fazer?',
+          cssClass: "primary",
         }
       ],
       buttons: [
@@ -87,7 +87,6 @@ export class HomePage implements OnInit{
     await alert.present();
   }
 
-
   async add(newTask: string) {
     //valida se o usario preencheu a task
     if (newTask.trim().length < 1) {
@@ -103,13 +102,9 @@ export class HomePage implements OnInit{
     this.updateLocalStorage();
   }
 
-
-
   updateLocalStorage(){
     localStorage.setItem('taskDb', JSON.stringify(this.tasks));
   }
-
-
 
   async openActions(task : any){
     const actionSheet = await this.actionSheetCtrl.create({
@@ -140,8 +135,6 @@ export class HomePage implements OnInit{
     console.log('onDidDismiss resolved with role', role);
   }
 
-
-
   async delete(task : any){
 
     const alert = await this.alertCtrl.create({
@@ -171,8 +164,6 @@ export class HomePage implements OnInit{
     await alert.present();
   }
 
-
-
   picture(){
     const options: CameraOptions = {
       quality: 50,
@@ -191,10 +182,8 @@ export class HomePage implements OnInit{
     });
   }
 
- 
   ngOnInit() {
   }
-
 
   //Ordenando itens na lista
   onReorderItems(event) {
@@ -208,7 +197,6 @@ export class HomePage implements OnInit{
 
     this.updateLocalStorage();
   }
-
 
 }
 
